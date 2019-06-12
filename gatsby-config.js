@@ -16,7 +16,7 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: process.env.DEPLOY_URL
+        apiURL: process.env.DEPLOY_URL || true
           ? "https://strapi-gatsby-demo-ab.herokuapp.com"
           : "http://localhost:1337",
         contentTypes: [`article`, `user`],
