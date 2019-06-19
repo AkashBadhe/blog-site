@@ -1,33 +1,19 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Layout from "../layouts/one-col-layout"
-import Reactmarkdown from "react-markdown"
-
+import BootStrapCarousel from '../components/bootstrap-carousel'
+import { Container } from 'react-bootstrap'
+import BlogCards from '../components/cards/blog-cards'
 const UserTemplate = ({ data }) => (
-  <Layout>
-    <h1>{data.strapiUser.username}</h1>
-    <ul>
-      {data.strapiUser.articles.map(article => (
-        <li key={article.id}>
-          <h2>
-            <Link to={`/Article_${article.id}`}>{article.title}</Link>
-          </h2>
+	<Layout>
+		<BootStrapCarousel data={data.allStrapiCarousel.edges} />
+		<br></br>
+		<h1>{data.strapiUser.username}</h1>
 
-          <Reactmarkdown
-            source={article.content.substring(0, 500).concat("...")}
-            transformImageUri={uri =>
-              uri.startsWith("http")
-                ? uri
-                : `${process.env.IMAGE_BASE_URL}${uri}`
-            }
-            className="indexArticle"
-            escapeHtml={false}
-          />
-          <Link to={`/Article_${article.id}`}>Read more</Link>
-        </li>
-      ))}
-    </ul>
-  </Layout>
+		<Container>
+			<BlogCards cards={data.strapiUser.articles} />
+		</Container>
+	</Layout>
 )
 
 export default UserTemplate
@@ -41,6 +27,22 @@ export const query = graphql`
         id
         title
         content
+      }
+	}
+	allStrapiCarousel {
+      edges {
+        node {
+          Title
+          subtitle
+          Image {
+            childImageSharp {
+              resize(width: 1200, height: 400){
+                src
+              }
+            }
+          }
+          description
+        }
       }
     }
   }

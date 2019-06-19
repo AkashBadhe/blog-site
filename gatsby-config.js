@@ -5,6 +5,7 @@ module.exports = {
     author: "Strapi team",
   },
   plugins: [
+    "gatsby-plugin-sass",
     "gatsby-plugin-react-helmet",
     {
       resolve: `gatsby-source-filesystem`,
@@ -16,10 +17,10 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: process.env.DEPLOY_URL || true
+        apiURL: process.env.DEPLOY_URL && false
           ? "https://strapi-gatsby-demo-ab.herokuapp.com"
           : "http://localhost:1337",
-        contentTypes: [`article`, `user`],
+        contentTypes: [`article`, `user`, 'carousel'],
         queryLimit: 1000,
       },
     },

@@ -1,35 +1,58 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
-import Img from "gatsby-image"
-import Reactmarkdown from "react-markdown"
-
+import { graphql } from "gatsby"
 import "../styles/global.css"
 import Layout from "../layouts/one-col-layout";
+import BootStrapCarousel from '../components/bootstrap-carousel'
+import { Badge, Container } from 'react-bootstrap'
+import BlogCards from '../components/cards/blog-cards'
 
-const IndexPage = ({ data }) => (
-  <Layout>
-  </Layout>
-)
+const IndexPage = ({ data }) => {
+  return (
+    <Layout>
+      <div >
+        <BootStrapCarousel data={data.allStrapiCarousel.edges} />
+        <br></br>
+        <Container>
+          <BlogCards cards={data.allStrapiArticle.edges} />
+        </Container>
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage
-
-export const pageQuery = graphql`
-  query IndexQuery {
-    allStrapiArticle {
+export const query = graphql`  
+query {allStrapiCarousel {
       edges {
         node {
-          id
-          image {
+          Title
+          subtitle
+          Image {
             childImageSharp {
-              fixed(width: 200, height: 125) {
-                ...GatsbyImageSharpFixed
+              resize(width: 1200, height: 400){
+                src
               }
             }
           }
-          title
-          content
+          description
         }
       }
     }
-  }
-`
+  	allStrapiArticle{
+      edges{
+        node{
+          id
+          title
+          content
+          image {
+            childImageSharp {
+              resize(width: 235, height: 160){
+                src
+              }
+            }
+          }
+        }
+      }
+    }
+  }`
+

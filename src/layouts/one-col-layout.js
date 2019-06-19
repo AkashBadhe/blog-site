@@ -11,9 +11,8 @@ import Master from "../layouts/master"
 
 const Layout = ({ children }) => (
 	<Master>
-		<main>{children}</main>
+		<main className="container">{children}</main>
 	</Master>
-
 )
 
 Layout.propTypes = {

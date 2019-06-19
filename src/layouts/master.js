@@ -7,14 +7,12 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { StaticQuery, graphql } from "gatsby"
-import '../css/vendor.css';
-import '../css/font-awesome/css/fontawesome.min.css';
-import '../css/base.css';
-import '../css/main.css';
-
+import { StaticQuery, graphql } from "gatsby";
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.min.css';
 import Header from "../components/header"
-import Foolter from '../components/footer'
+import Foolter from '../components/footer/footer'
+
 // import "./layout.css"
 
 const Master = ({ children }) => (
